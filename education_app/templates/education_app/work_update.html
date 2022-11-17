@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block title %}
+<header class="page-title">
+    <h1>Обновление работы {{ work.id }}</h1>
+</header>
+{% endblock %}
+
+{% block content %}
+<section class="content">
+    <article>
+        <p><strong>Название работы:</strong> {{ work.name }}</p>
+        {% if work.description %}
+        <p><strong>Описание работы:</strong> {{ work.description }}</p>
+        {% else %}
+        <p><strong>Описание отсутствует</strong></p>
+        {% endif %}
+    </article>
+    <form action={% url 'works-update' work.id %} method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+</section>
+{% endblock %}
